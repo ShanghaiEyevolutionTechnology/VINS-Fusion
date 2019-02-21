@@ -1,5 +1,3 @@
-Original readme of VINS-Fusion is saved in README_origin.md. This project is forked from VINS-Fusion. We add LeadSense examples.
-
 # VINS-Fusion
 ## An optimization-based multi-sensor state estimator
 
@@ -152,42 +150,3 @@ The source code is released under [GPLv3](http://www.gnu.org/licenses/) license.
 We are still working on improving the code reliability. For any technical issues, please contact Tong Qin <qintonguavATgmail.com>.
 
 For commercial inquiries, please contact Shaojie Shen <eeshaojieATust.hk>.
-
-
-## 9. Run with LeadSense
-### 9.1 Edit the config file in `/config/leadsense/`:
-
-- Change `image_width`, `image_height` with target resolution.
-- Change `fx`, `fy`, `cx`, `cy` with rectified stereo parameters.
-- Change `body_T_cam0`, `body_T_cam1` if you do camera-IMU calibration.
-- Change `acc_n`, `gyr_n`, `acc_w`, `gyr_w` if you do IMU parameter calibration.
-
-### 9.2 Start LeadSense node with the selected resolution, without distance calculation. (eg. 640*400 30fps)
-```
-	roslaunch leadsense_ros leadsense_nodisplay.launch calc_distance:=false resolution_fps:=21
-```
-Then you can run with stereo cameras / mono camera+IMU / stereo cameras+IMU.
-
-### 9.3 Monocualr camera + IMU
-
-```
-    roslaunch vins vins_rviz.launch
-    rosrun vins vins_node ~/catkin_ws/src/VINS-Fusion/config/leadsense/leadsense_mono_imu_config.yaml
-    (optional) rosrun loop_fusion loop_fusion_node ~/catkin_ws/src/VINS-Fusion/config/leadsense/leadsense_mono_imu_config.yaml
-```
-
-### 9.4 Stereo cameras + IMU
-
-```
-    roslaunch vins vins_rviz.launch
-    rosrun vins vins_node ~/catkin_ws/src/VINS-Fusion/config/leadsense/leadsense_stereo_imu_config.yaml
-    (optional) rosrun loop_fusion loop_fusion_node ~/catkin_ws/src/VINS-Fusion/config/leadsense/leadsense_stereo_imu_config.yaml
-```
-
-### 9.5 Stereo cameras
-
-```
-    roslaunch vins vins_rviz.launch
-    rosrun vins vins_node ~/catkin_ws/src/VINS-Fusion/config/leadsense/leadsense_stereo_config.yaml
-    (optional) rosrun loop_fusion loop_fusion_node ~/catkin_ws/src/VINS-Fusion/config/leadsense/leadsense_stereo_config.yaml
-```
